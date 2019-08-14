@@ -1,0 +1,28 @@
+# Tracking changes in between versions to add new values (do not edit manually)
+config-version: 1
+
+# This option makes it announce worlds that weren't added to the config
+announce-worlds-not-in-config: true
+default-message: "&2{player} has entered {world}"
+
+# Default worlds
+world:
+   announce: true
+   name: "The Overworld"
+   message: "&2{player} has entered {world}"
+   
+world_nether:
+   announce: true 
+   name: "The Nether"
+   message: "&4{player} has entered {world}"
+
+world_the_end:
+   announce: true
+   name: "The End"
+   message: "&5{player} has entered {world}"
+
+# Add your custom worlds here
+world_example:
+   announce: false
+   name: "Example World"
+   message: "&3{player} has entered {world}"
