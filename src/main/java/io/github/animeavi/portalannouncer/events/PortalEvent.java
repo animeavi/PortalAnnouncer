@@ -29,7 +29,7 @@ public class PortalEvent implements Listener {
             String fromWorld = event.getFrom().getWorld().getName().toString();
             String toWorld = event.getTo().getWorld().getName().toString();
 
-            if (fromWorld == toWorld)
+            if (fromWorld.equals(toWorld))
                 return;
 
             announce(toWorld, event.getPlayer().getName());
@@ -37,20 +37,17 @@ public class PortalEvent implements Listener {
     }
 
     private void announce(String worldName, String playerName) {
-        worldName = worldName.toLowerCase();
-        String niceName = worldName;
-        String msg = defaultMessage;
         FileConfiguration config = PortalAnnouncer.config;
+        worldName = worldName.toLowerCase();
+        String niceName = config.getString(worldName + ".name", worldName);
+        String msg = config.getString(worldName + ".message", defaultMessage);
 
-        if ((config.getString(worldName + ".name") != null) &&
-            (config.getString(worldName + ".message") != null) &&
-             config.getBoolean(worldName + ".announce")) {
-            msg = config.getString(worldName + ".message");
-            niceName = config.getString(worldName + ".name");
+        if (!config.getBoolean(worldName + ".announce", true)) {
+            return;
         }
 
         if (config.getBoolean("announce-worlds-not-in-config", true) ||
-            config.getBoolean(worldName + ".announce")) {
+            config.getBoolean(worldName + ".announce", true)) {
             msg = msg.replace("{player}", playerName).replace("{world}", niceName);
 
             PortalAnnouncer.plugin.getServer()
