@@ -47,7 +47,7 @@ public class PortalEvent implements Listener {
         }
 
         if (config.getBoolean("announce-worlds-not-in-config", true) ||
-            config.getBoolean(worldName + ".announce", true)) {
+            config.getBoolean(worldName + ".announce")) {
             msg = msg.replace("{player}", playerName).replace("{world}", niceName);
 
             PortalAnnouncer.plugin.getServer()
